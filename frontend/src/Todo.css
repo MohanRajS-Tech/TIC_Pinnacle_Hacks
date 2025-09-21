@@ -1,0 +1,114 @@
+.todo-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Changed from height to min-height */
+  background-color: #f0f2f5;
+  padding: 1rem; /* Added padding for smaller screens */
+}
+
+.todo-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  display: flex; /* Added flex properties */
+  flex-direction: column;
+  max-height: 90vh; /* Added max-height */
+}
+
+.todo-header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.todo-form {
+  display: flex;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0; /* Prevent form from shrinking */
+}
+
+.todo-input {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+}
+
+.todo-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.todo-button {
+  padding: 0.75rem 1.25rem;
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.todo-button:hover {
+  background-color: #0056b3;
+}
+
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto; /* Make the list scrollable */
+  flex-grow: 1; /* Allow the list to grow and fill available space */
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item span {
+  font-size: 1.1rem;
+  word-break: break-word; /* Added to break long words */
+}
+
+.todo-delete-button {
+  padding: 0.4rem 0.8rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.todo-delete-button:hover {
+  background-color: #c82333;
+}
+
+.back-link {
+  display: block;
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #007bff;
+  text-decoration: none;
+  flex-shrink: 0; /* Prevent link from shrinking */
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,112 @@
+Application Name - Plan Pilot
+Headline:
+Stop typing chaos into group chat — plan like a pro.
+
+Subheadline:
+We do the boring breakdowns: you get a ready-to-run plan and fewer panicked messages.
+
+Primary CTA: Make My Plan
+Secondary CTA: See 30s Demo
+Microcopy: Free to try — create a plan in under 60 seconds.
+Page structure (top → bottom) — MVP only
+
+Hero (top fold) — headline, subheadline, CTAs, animated mockup/GIF on right.
+
+How it works (3 steps) — short icons + one-line steps.
+
+Mini demo / Try button — loads a canned demo plan (no signup).
+
+Footer — small meta + privacy link.
+
+Keep the page short so judges instantly see value.
+Hero UX behavior (exact)
+
+Make My Plan → open Create Modal (or navigate to /create) where user can enter Title / Date / Notes.
+
+See 30s Demo → open a modal with a GIF or Lottie animation (30s) showing: paste brief → tasks appear → mark complete.
+Visual & micro UX rules
+
+Layout: 2 columns desktop (copy left, mockup right);
+
+Colors: dark navy background, gradient CTA from indigo → violet.
+
+Task status colors: Pending = amber, Completed = green, Overdue = red.
+
+Micro interactions: CTA hover raises button (scale 1.03), mockup has subtle floating shadow.
+
+Performance: GIF < 500KB or use Lottie JSON for smaller size and crispness.
+Accessibility checklist 
+
+Headline uses <h1>.
+
+CTA buttons have aria-label.
+
+Keyboard focus visible for all interactive elements.
+
+Color contrast for body text ≥ 4.5:1.
+
+Modal traps focus while open.
+
+Hero image alt text present.
+Assets (where to get them)
+
+Mockup GIF / Lottie: LottieFiles (search “dashboard”, “checklist” animations).
+
+Icons: Heroicons (free).
+
+Colors & fonts: Tailwind defaults + Inter font.
+Copy-paste hero component
+// src/components/HeroMVP.jsx
+import React from 'react';
+
+export default function HeroMVP({ onOpenCreate, onOpenDemo, onTryDemo }) {
+  return (
+    <section className="min-h-[70vh] flex items-center py-12 px-6 bg-gradient-to-br from-slate-900 to-indigo-950 text-white">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+            Stop typing chaos into group chat — <span className="text-emerald-400">plan like a pro.</span>
+          </h1>
+
+          <p className="mt-5 text-lg text-slate-300 max-w-xl">
+            We do the boring breakdowns: you get a ready-to-run plan and fewer panicked messages.
+          </p>
+
+          <div className="mt-7 flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={onOpenCreate}
+              aria-label="Make My Plan"
+              className="px-5 py-3 rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 shadow-lg hover:scale-[1.03] transform transition"
+            >
+              Make My Plan
+            </button>
+
+            <button
+              onClick={onOpenDemo}
+              aria-label="See 30 second demo"
+              className="px-4 py-3 rounded-lg border border-slate-600 text-slate-100 hover:bg-slate-800"
+            >
+              See 30s Demo
+            </button>
+          </div>
+
+          <p className="mt-3 text-sm text-slate-400">Free to try — create a plan in under 60 seconds.</p>
+
+          <div className="mt-6">
+            <button onClick={onTryDemo} className="text-sm text-slate-200 underline">Try a demo plan</button>
+          </div>
+        </div>
+
+        <div className="flex justify-center md:justify-end">
+          <div className="w-[360px] h-[260px] bg-slate-800 rounded-2xl p-3 shadow-2xl flex items-center justify-center">
+            <img
+              src="/assets/demo-mockup.gif"
+              alt="Animated demo showing: paste event brief, tasks generated, and user marking tasks complete."
+              className="w-full h-full object-cover rounded-xl"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,213 @@
+MVP Development Document: AI Event Co-Organizer with Optional Multi-Agent (Crew AI)
+Objective
+
+Build a hackathon-ready MVP that:
+
+Takes minimal event inputs (title, date, notes)
+
+Generates a task list with deadlines using Gemini API
+
+Displays a futuristic, color-coded dashboard
+
+Supports task completion toggle
+
+Optional / Stretch Goal: Integrate Crew AI to create a multi-agent workflow for task generation, assignment, and dynamic updates if time permits.
+
+Tech Stack
+Layer	Technology / Tool	Notes
+Frontend	React + Tailwind CSS	Smooth, futuristic UI with responsive design
+Backend	Python (FastAPI / Flask)	Handles API calls to Gemini LLM and task processing
+Database	Firebase Firestore	Store tasks, deadlines, and completion status
+Hosting / Demo	Firebase Hosting	Local demo is sufficient
+AI / LLM	Gemini API	Free-tier LLM for generating tasks and deadlines
+Optional Multi-Agent	Crew AI Framework	Coordinate multiple AI agents for enhanced planning
+System Architecture
+
+Frontend (React)
+
+Event input form: title, date, notes
+
+Task dashboard: color-coded list of tasks
+
+Task completion toggle: click to mark task as complete
+
+Backend (Python + FastAPI/Flask)
+
+Receives event input from frontend
+
+Calls Gemini API LLM to generate tasks
+
+Stores tasks in Firestore
+
+Serves tasks back to frontend for display
+
+Database (Firestore)
+
+Collection: events
+
+Document fields:
+
+title (string)
+
+date (string / timestamp)
+
+notes (string)
+
+tasks (array of objects):
+
+task_name (string)
+
+deadline (string / timestamp)
+
+status (enum: pending/completed)
+
+Optional Multi-Agent Flow (Crew AI)
+
+Agents could handle:
+
+Task Generation Agent → Gemini API to generate structured tasks
+
+Deadline Planner Agent → Assign optimal deadlines based on event date
+
+Assignment Agent → Suggest owners (placeholders) for tasks
+
+Dashboard Updater Agent → Push updates and color-code tasks
+
+Crew AI orchestrates these agents sequentially or in parallel
+
+Only implement if time permits (can mock agents for demo)
+
+Step-by-Step Development Plan
+Step 1: Frontend Form
+
+React component for event input:
+
+Fields: Event Title, Date, Notes
+
+Submit button triggers backend call
+
+Validation: all fields required
+
+Styling: futuristic UI (Tailwind animations, smooth hover effects)
+
+Step 2: Backend API
+
+Route: /generate-tasks (POST)
+
+Input: JSON { title, date, notes }
+
+Process:
+
+Call Gemini API LLM with prompt to generate tasks + deadlines
+
+Parse JSON response
+
+Store tasks in Firestore
+
+Output: JSON { event_id, tasks }
+
+Step 3: Task Dashboard
+
+Fetch tasks from Firestore for an event
+
+Display as list:
+
+Task name
+
+Deadline
+
+Status (color-coded: Pending = yellow, Completed = green)
+
+Task completion toggle → update Firestore
+
+Step 4: Firestore Integration
+
+Store tasks as part of event document
+
+Update task status on toggle
+
+Optional: Realtime listeners for dynamic updates
+
+Step 5: Optional Crew AI Integration
+
+Set up multiple agents for:
+
+Task generation
+
+Deadline planning
+
+Task assignment suggestions
+
+Dashboard updates
+
+Crew AI handles workflow orchestration, ensuring agents run in sequence
+
+Can be mocked if hackathon time is limited
+
+Step 6: Demo Flow
+
+User enters event info
+
+Frontend sends details → backend API
+
+Gemini generates tasks → stored in Firestore
+
+Dashboard displays tasks
+
+User toggles tasks as complete
+
+Optional: Crew AI agents orchestrate additional enhancements
+
+Gemini API Prompt Design
+
+Example Prompt:
+
+You are an AI event planner. Event: "{title}" on {date} with notes: "{notes}". 
+Generate 5 tasks needed to complete the event, each with a task name and a deadline. 
+Return only JSON.
+
+UI/UX Suggestions
+
+Futuristic look: gradient backgrounds, smooth shadows, animated task toggles
+
+Color-coded tasks:
+
+Pending: Yellow / Amber
+
+Completed: Green
+
+Responsive: Works on desktop + mobile
+
+Optional animation: Fade-in for new tasks, smooth checkmark for completed tasks
+
+Intern Instructions / Tips
+
+Focus only on minimum inputs (title, date, notes)
+
+Ensure dashboard list + task completion toggle works
+
+Use Gemini API free tier
+
+No multi-user collaboration required for hackathon MVP
+
+Host locally or Firebase Studio
+
+Optional Crew AI: implement if time permits; otherwise mock agents
+
+Stretch Goals (Hackathon Extras)
+
+Simulated notifications for task deadlines
+
+Task priority levels
+
+Editing tasks manually on dashboard
+
+Timeline view (mini-Gantt chart)
+
+Crew AI multi-agent orchestration for automation
+
+✅ Deliverable
+
+Working MVP: User enters event → AI generates tasks → tasks appear on dashboard → toggle completion works
+
+Optional: Crew AI multi-agent orchestration enhances the planning process
